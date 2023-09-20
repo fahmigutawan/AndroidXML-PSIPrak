@@ -29,13 +29,15 @@
                 android:id="@+id/bab3_layout_input_img_iv"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
-                app:srcCompat="@drawable/ic_person"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_person" />
 
             <Button
                 android:id="@+id/bab3_layout_input_pickimg_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_upload"
+                android:drawableTint="@color/white"
                 android:text="Pilih Gambar" />
         </LinearLayout>
 
@@ -82,7 +84,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Tinggi"
-                        android:inputType="number"/>
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <SeekBar
@@ -91,26 +93,24 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
             </LinearLayout>
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/bab3_layout_input_submit_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:background="@drawable/positive_button_bg"
                 android:text="Submit"
-                />
+                android:textColor="@color/white"/>
 
-            <Button
-                android:id="@+id/bab3_layout_input_keluar_btn"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bab3_layout_input_hapus_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Keluar"
-                />
+                android:layout_margin="4dp"
+                android:background="@drawable/negative_button_bg"
+                android:text="Hapus"
+                android:textColor="@color/white"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

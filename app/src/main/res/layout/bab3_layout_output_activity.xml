@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center">
 
-    <Button
-        android:id="@+id/button2"
+    <ImageView
+        android:id="@+id/bab3_layout_output_profile_iv"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        app:srcCompat="@drawable/ic_person"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/bab3_layout_output_nama_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Nama"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/bab3_layout_output_ttl_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tempat, Tanggal lahir"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/bab3_layout_output_tinggi_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tinggi Badan"
+        android:textAlignment="center" />
 </LinearLayout>

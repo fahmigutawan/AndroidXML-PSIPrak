@@ -24,6 +24,7 @@
         <activity android:name=".bab3.Bab3Activity"/>
         <activity android:name=".bab3_layout.Bab3LayoutInputActivity"/>
         <activity android:name=".bab3_layout.Bab3LayoutOutputActivity"/>
+        <activity android:name=".bab3_fragment.Bab3FragmentActivity"/>
     </application>
 
 </manifest>

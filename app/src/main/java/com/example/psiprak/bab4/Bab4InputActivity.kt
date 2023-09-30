@@ -25,13 +25,8 @@ class Bab4InputActivity : AppCompatActivity() {
 
                 intent.putExtra(
                     "luas",
-                    (binding
-                        .bab4InputEt
-                        .text
-                        .toString()
-                        .toDoubleOrNull()
-                        ?: .0)
-                        .volume()
+                    (binding.bab4InputEt.text.toString().toDoubleOrNull()
+                        ?: .0).volume()
                 )
 
                 startActivity(intent)

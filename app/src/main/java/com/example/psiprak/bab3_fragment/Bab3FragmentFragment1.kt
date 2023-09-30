@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.example.psiprak.R
@@ -11,6 +12,7 @@ import com.example.psiprak.databinding.Bab3FragmentFragment1Binding
 
 class Bab3FragmentFragment1:Fragment() {
     lateinit var binding : Bab3FragmentFragment1Binding
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -18,8 +20,15 @@ class Bab3FragmentFragment1:Fragment() {
     ): View? {
         binding = Bab3FragmentFragment1Binding.inflate(inflater)
 
-        binding.bab3FragmentPilihgambarBtn.setOnClickListener {
+        val profilePictureLauncher =
+            registerForActivityResult(ActivityResultContracts.GetContent()) {
+                it?.let {uriNotNull ->
+                    binding.bab3FragmentIv.setImageURI(uriNotNull)
+                }
+            }
 
+        binding.bab3FragmentPilihgambarBtn.setOnClickListener {
+            profilePictureLauncher.launch("image/*")
         }
 
         binding.bab3FragmentKefragmentduaBtn.setOnClickListener {

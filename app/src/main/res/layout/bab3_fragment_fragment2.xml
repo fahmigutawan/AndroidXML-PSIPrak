@@ -14,6 +14,7 @@
             android:layout_height="wrap_content"
             android:text="SELAMAT DATANG DI FRAGMENT KEDUA"/>
         <Button
+            android:id="@+id/bab3_fragment_kefragmentsatu_btn"
             android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

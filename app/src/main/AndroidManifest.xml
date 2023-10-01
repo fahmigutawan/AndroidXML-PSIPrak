@@ -13,7 +13,7 @@
         android:theme="@style/Theme.PSIPrak"
         tools:targetApi="31">
         <activity
-            android:name=".bab4.Bab4InputActivity"
+            android:name=".bab5.Bab5Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".bab4.Bab4OutputActivity"/>
     </application>
 
 </manifest>

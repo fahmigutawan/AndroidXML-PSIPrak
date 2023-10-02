@@ -15,7 +15,7 @@ class Bab5Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val viewModel by viewModels<Bab5ViewModel>()
         binding = Bab5ActivityBinding.inflate(layoutInflater)
-        binding.bab5ListRv.adapter = Bab5RvAdapter(ArrayList())
+        binding.bab5ListRv.adapter = Bab5RvAdapter(ArrayList(),{},{})
         setContentView(binding.root)
 
         binding.bab5AddEditBtn.setOnClickListener {
@@ -28,11 +28,18 @@ class Bab5Activity : AppCompatActivity() {
                     "Pastikan tidak ada data kosong",
                     Toast.LENGTH_SHORT
                 ).show()
-            }else{
+            } else {
                 if (viewModel.pickedData.value == null) {
                     viewModel.addDataParkir(
-                        binding.bab5PelatEt.text.toString(),
-                        binding.bab5WarnaEt.text.toString()
+                        pelatNomer = binding.bab5PelatEt.text.toString(),
+                        warnaKendaraan = binding.bab5WarnaEt.text.toString(),
+                        onItemExisted = {
+                            Toast.makeText(
+                                this,
+                                "Kendaraan dengan pelat sama sudah ada",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     )
                 } else {
                     viewModel.editDataParkir(
@@ -40,17 +47,39 @@ class Bab5Activity : AppCompatActivity() {
                         binding.bab5WarnaEt.text.toString()
                     )
                 }
+
+                binding.bab5PelatEt.setText("")
+                binding.bab5WarnaEt.setText("")
+                viewModel.pickedData.postValue(null)
             }
         }
         viewModel.pickedData.observe(this) {
             if (it == null) {
-                binding.bab5AddEditBtn.text = "BUAT"
+                binding.apply {
+                    bab5AddEditBtn.text = "BUAT"
+                }
             } else {
-                binding.bab5AddEditBtn.text = "EDIT"
+                binding.apply {
+                    bab5AddEditBtn.text = "EDIT"
+                    bab5PelatEt.setText(it.pelat_nomor)
+                    bab5WarnaEt.setText(it.warna_kendaraan)
+                }
             }
         }
-        viewModel.datas.observe(this){
-            binding.bab5ListRv.adapter = Bab5RvAdapter(it)
+        viewModel.datas.observe(this) {
+            binding.bab5ListRv.adapter =
+                Bab5RvAdapter(
+                    items = it,
+                    onEditClicked = { picked ->
+                        viewModel.pickedData.postValue(picked)
+                    },
+                    onHapusClicked = { index ->
+                        viewModel.removeDataParkir(index)
+                        if(viewModel.pickedData.value != null){
+                            viewModel.pickedData.postValue(null)
+                        }
+                    }
+                )
         }
     }
 }

@@ -9,7 +9,9 @@ import com.example.psiprak.R
 import com.example.psiprak.databinding.Bab5KendaraanItemBinding
 
 class Bab5RvAdapter(
-    private val items:List<Bab5KendaraanModel>
+    private val items:List<Bab5KendaraanModel>,
+    private val onEditClicked:(item:Bab5KendaraanModel) -> Unit,
+    private val onHapusClicked:(index:Int) -> Unit
 ) : RecyclerView.Adapter<Bab5RvViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Bab5RvViewHolder {
         val binding = Bab5KendaraanItemBinding.inflate(LayoutInflater.from(parent.context))
@@ -22,7 +24,16 @@ class Bab5RvAdapter(
     }
 
     override fun onBindViewHolder(holder: Bab5RvViewHolder, position: Int) {
-        holder.binding.bab5KendaraanitemPelatTv.text = items[position].pelat_nomor
+        holder.binding.apply {
+            bab5KendaraanitemPelatTv.text = items[position].pelat_nomor
+            bab5KendaraanitemWarnaTv.text = items[position].warna_kendaraan
+            bab5KendaraanitemEditBtn.setOnClickListener {
+                onEditClicked(items[position])
+            }
+            bab5KendaraanitemHapusBtn.setOnClickListener {
+                onHapusClicked(position)
+            }
+        }
     }
 }
 

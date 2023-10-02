@@ -16,12 +16,25 @@ class Bab5ViewModel : ViewModel() {
         pickedData.postValue(null)
     }
 
-    fun addDataParkir(pelatNomer: String, warnaKendaraan: String) {
+    fun addDataParkir(
+        onItemExisted:() -> Unit,
+        pelatNomer: String,
+        warnaKendaraan: String
+    ) {
+        _datas.value?.filter {
+            it.pelat_nomor.replace(" ", "").lowercase().trim() == pelatNomer.replace(" ", "")
+                .lowercase().trim()
+        }?.let {
+            if(it.isNotEmpty()){
+                onItemExisted()
+                return
+            }
+        }
         _datas.postValue(
             _datas.value.apply {
                 this?.add(
                     Bab5KendaraanModel(
-                        pelatNomer.replace(" ", "").lowercase(),
+                        pelatNomer.uppercase().trim(),
                         warnaKendaraan
                     )
                 )
@@ -34,12 +47,13 @@ class Bab5ViewModel : ViewModel() {
             _datas.postValue(
                 _datas.value.apply {
                     val index = this?.indexOf(this.findLast {
-                        it.pelat_nomor == pelatNomer.replace(" ", "").lowercase()
+                        it.pelat_nomor.replace(" ", "").lowercase().trim() == pelatNomer.replace(" ", "")
+                            .lowercase().trim()
                     })
                     this?.set(
                         index ?: -1,
                         Bab5KendaraanModel(
-                            pelatNomer.replace(" ", "").lowercase(),
+                            pelatNomer.uppercase().trim(),
                             warnaKendaraan
                         )
                     )
@@ -50,12 +64,10 @@ class Bab5ViewModel : ViewModel() {
         }
     }
 
-    fun removeDataParkir(pelatNomer: String) {
+    fun removeDataParkir(index: Int) {
         _datas.postValue(
             _datas.value.apply {
-                this?.removeIf {
-                    it.pelat_nomor == pelatNomer
-                }
+                this?.removeAt(index)
             }
         )
     }
